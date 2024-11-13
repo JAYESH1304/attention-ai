@@ -236,37 +236,37 @@ def main():
     
     most_relevant_paper = None
 
-    # if st.button("Generate Answer"):
-    #     if user_query:
-    #         with st.spinner("Querying the database and generating answer..."):
-    #             driver = connect_to_neo4j(neo4j_uri, neo4j_user, neo4j_password)
-    #             try:
-    #                 most_relevant_paper = query_relevant_papers(driver, user_query)
-    #                 most_relevant_paper = most_relevant_paper[0]
-    #                 if most_relevant_paper:
-    #                     st.write(f"**Most Relevant Paper for above query**: {most_relevant_paper['title']}")
-    #                     st.write(f"**Summary**: {most_relevant_paper['summary']}")
-    #                     st.write(f"**Link**: [View Paper]({most_relevant_paper['link']})")
+    if st.button("Generate Answer"):
+        if user_query:
+            with st.spinner("Querying the database and generating answer..."):
+                driver = connect_to_neo4j(neo4j_uri, neo4j_user, neo4j_password)
+                try:
+                    most_relevant_paper = query_relevant_papers(driver, user_query)
+                    most_relevant_paper = most_relevant_paper[0]
+                    if most_relevant_paper:
+                        st.write(f"**Most Relevant Paper for above query**: {most_relevant_paper['title']}")
+                        st.write(f"**Summary**: {most_relevant_paper['summary']}")
+                        st.write(f"**Link**: [View Paper]({most_relevant_paper['link']})")
                         
-    #                     pdf_path = download_arxiv_paper(most_relevant_paper["link"])
-    #                     if pdf_path:
-    #                         st.write("**Downloaded Paper PDF**:", pdf_path)
-    #                         context = extract_text_from_pdf(pdf_path)
-    #                         create_vector_embedding(context)
+                        pdf_path = download_arxiv_paper(most_relevant_paper["link"])
+                        if pdf_path:
+                            st.write("**Downloaded Paper PDF**:", pdf_path)
+                            context = extract_text_from_pdf(pdf_path)
+                            create_vector_embedding(context)
                             
-    #                         document_chain=create_stuff_documents_chain(llm,prompt)
-    #                         retriever=st.session_state.vectors.as_retriever()
-    #                         retrieval_chain=create_retrieval_chain(retriever,document_chain)
-    #                         response=retrieval_chain.invoke({'input':user_query})
-    #                         st.write("**Answer to Your Query:**")
-    #                         st.write(response['answer'])
+                            document_chain=create_stuff_documents_chain(llm,prompt)
+                            retriever=st.session_state.vectors.as_retriever()
+                            retrieval_chain=create_retrieval_chain(retriever,document_chain)
+                            response=retrieval_chain.invoke({'input':user_query})
+                            st.write("**Answer to Your Query:**")
+                            st.write(response['answer'])
                     
-    #                 else:
-    #                     st.info("No relevant papers found for the query.")
-    #             except Exception as e:
-    #                 st.error(f"An error occurred while querying data: {e}")
-    #             finally:
-    #                 driver.close()
+                    else:
+                        st.info("No relevant papers found for the query.")
+                except Exception as e:
+                    st.error(f"An error occurred while querying data: {e}")
+                finally:
+                    driver.close()
                     
     if st.button("Generate Future Directions"):
         if user_query:
