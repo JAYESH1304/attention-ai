@@ -167,7 +167,7 @@ def create_vector_embedding(input_text: str):
 
 def generate_future_directions(papers: List[Dict]) -> str:
     """Generate future research directions based on paper summaries."""
-    summaries = "\n".join([f"Title: {p['title']}\nSummary: {p['summary']}\n" for p in papers[:1]])
+    summaries = "\n".join([f"Title: {p['title']}\nSummary: {p['summary']}\n" for p in papers[0:1]])
     
     prompt = f"""Based on these recent research papers:
     {summaries}
@@ -178,10 +178,9 @@ def generate_future_directions(papers: List[Dict]) -> str:
     2. Potential impact
     3. Technical challenges to overcome"""
     try:
-        # document_chain = create_stuff_documents_chain(llm, prompt)
-        response = llm.invoke(prompt)  # Assuming it works directly for a generation process
+        response = llm.invoke(prompt)
+        
         return response
-       
     except Exception as e:
         print(f"Error generating future directions: {e}")
         return "Error generating future research directions."
@@ -233,8 +232,6 @@ def main():
 
     st.header("User Query and Generate Answer")
     user_query = st.text_input("Enter your query:")
-    
-    most_relevant_paper = None
 
     if st.button("Generate Answer"):
         if user_query:
@@ -244,7 +241,7 @@ def main():
                     most_relevant_paper = query_relevant_papers(driver, user_query)
                     most_relevant_paper = most_relevant_paper[0]
                     if most_relevant_paper:
-                        st.write(f"**Most Relevant Paper for above query**: {most_relevant_paper['title']}")
+                        st.write(f"**Most Relevant Paper**: {most_relevant_paper['title']}")
                         st.write(f"**Summary**: {most_relevant_paper['summary']}")
                         st.write(f"**Link**: [View Paper]({most_relevant_paper['link']})")
                         
@@ -275,7 +272,7 @@ def main():
                 try:
                     most_relevant_papers = query_relevant_papers(driver, user_query)
                     if most_relevant_papers:
-                        future_directions = generate_future_directions(most_relevant_papers[0])
+                        future_directions = generate_future_directions(most_relevant_papers)
                         st.write("**Future Research Directions:**")
                         st.write(future_directions)
                     else:
