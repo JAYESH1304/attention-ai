@@ -1,6 +1,3 @@
-Here's a suggested `README.md` file that you can use for your code when uploading it to GitHub:
-
----
 
 # Academic Research Paper Assistant Application
 
@@ -76,14 +73,5 @@ Make sure to set the required environment variables before running the app:
 └── README.md                # Project documentation
 ```
 
-## Contributing
 
-Contributions are welcome! Please fork this repository and submit a pull request for any feature additions or bug fixes.
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-Feel free to modify the content as per your project specifics or preferences!
