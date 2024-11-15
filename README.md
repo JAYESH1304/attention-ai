@@ -3,6 +3,8 @@
 
 This Streamlit-based application assists users in querying academic research papers, extracting and storing data from ArXiv, and generating answers and future research directions using an integrated NLP pipeline.
 
+[Watch the project demo on YouTube](https://www.youtube.com/watch?v=wMX306g5tf0)
+
 ## Features
 
 - **Fetch and Store ArXiv Papers**: Retrieve academic papers from ArXiv based on user-defined topics and date ranges.
