@@ -75,5 +75,5 @@ Make sure to set the required environment variables before running the app:
 └── README.md                # Project documentation
 ```
 
-
+Thank you for checking out my project! Feel free to explore, contribute, or reach out if you have any questions.
 
